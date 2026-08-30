@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Joshika V | Portfolio",
+  title: "Joshika V - Software Engineer",
   description: "Portfolio of Joshika V",
 };
 
