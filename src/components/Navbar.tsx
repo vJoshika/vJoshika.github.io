@@ -45,6 +45,20 @@ export default function Navbar() {
     { name: "Contact", href: "#contact" },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const target = document.querySelector(href) as HTMLElement;
+    if (target) {
+      if ((window as any).lenis) {
+        // Scroll step by step with a smooth, longer duration
+        (window as any).lenis.scrollTo(target, { duration: 1.5, easing: (t: number) => 1 - Math.pow(1 - t, 4) });
+      } else {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsOpen(false);
+  };
+
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -52,7 +66,11 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        <a href="#hero" className="text-2xl font-bold tracking-tighter text-neutral-800">
+        <a 
+          href="#hero" 
+          onClick={(e) => handleNavClick(e, "#hero")}
+          className="text-2xl font-bold tracking-tighter text-neutral-800"
+        >
           Joshika<span className="text-pink-500">.</span>
         </a>
 
@@ -62,6 +80,7 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-sm font-medium text-neutral-600 hover:text-pink-500 transition-colors"
             >
               {link.name}
@@ -90,7 +109,7 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-lg font-medium text-neutral-700 hover:text-pink-500 transition-colors"
             >
               {link.name}

@@ -17,6 +17,9 @@ export default function Page() {
     const lenis = new Lenis({
       smoothWheel: true,
     });
+    
+    // Expose lenis globally for the Navbar to use
+    (window as any).lenis = lenis;
 
     let rafId: number;
 
@@ -30,6 +33,7 @@ export default function Page() {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      delete (window as any).lenis;
     };
   }, []);
 
