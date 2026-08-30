@@ -37,7 +37,7 @@ export default function About() {
               </div>
               
               <h4 className="text-2xl font-bold text-neutral-900 mb-1">Joshika V</h4>
-              <p className="text-pink-500 font-medium text-sm mb-4">Electronics & Communication Engineering</p>
+              <p className="text-pink-500 font-medium text-sm mb-4">Software Engineer</p>
               
               <div className="w-full h-px bg-gradient-to-r from-transparent via-pink-200 to-transparent my-4"></div>
               
