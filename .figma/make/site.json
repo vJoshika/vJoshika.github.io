@@ -1,0 +1,10 @@
+{
+  "description": "This web application transforms Figma designs into fully responsive, pixel-perfect websites, ensuring a seamless user experience across all devices.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
