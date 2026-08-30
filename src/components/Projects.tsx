@@ -34,7 +34,7 @@ export default function Projects() {
   ];
 
   return (
-    <section id="project" className="relative w-full pt-24 bg-[#fdf2f8] font-sans -mb-48 lg:-mb-[45vh] z-10">
+    <section id="project" className="relative w-full min-h-screen pt-24 bg-[#fdf2f8] font-sans -mb-48 lg:-mb-[45vh] z-10 flex flex-col justify-center">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10 w-full">
         
         {/* Header */}

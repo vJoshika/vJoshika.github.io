@@ -55,7 +55,7 @@ export default function HowItWorks() {
   }, []);
 
   return (
-    <section className="relative w-full py-24 bg-[#fdf2f8] font-sans overflow-hidden">
+    <section className="relative w-full min-h-screen py-24 bg-[#fdf2f8] font-sans overflow-hidden flex flex-col justify-center">
       <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
         {/* Header */}

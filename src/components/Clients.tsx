@@ -20,7 +20,7 @@ export default function Clients() {
   const marqueeItems = [...techLogos, ...techLogos];
 
   return (
-    <section className="w-full py-16 bg-[#fdf2f8] overflow-hidden">
+    <section className="w-full min-h-screen py-16 bg-[#fdf2f8] overflow-hidden flex flex-col justify-center">
       <div className="max-w-7xl mx-auto px-6 mb-12 text-center animate-fade-in-up">
         <h3 className="text-[13px] md:text-[14px] font-bold tracking-[0.2em] text-neutral-500 uppercase">
           Technologies & Tools I Work With

@@ -83,7 +83,7 @@ export default function Skillset() {
   ];
 
   return (
-    <section id="skillset" className="relative w-full py-24 bg-[#fdf2f8] overflow-hidden font-sans">
+    <section id="skillset" className="relative w-full min-h-screen py-24 bg-[#fdf2f8] overflow-hidden font-sans flex flex-col justify-center">
       
       {/* Decorative Elements */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-pink-200/50 rounded-full blur-3xl pointer-events-none"></div>

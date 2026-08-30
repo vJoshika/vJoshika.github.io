@@ -2,7 +2,7 @@ import { ArrowRight, Download, User } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#ffe4e8] via-[#fdf2f8] to-[#fce7f3] font-sans">
+    <section id="hero" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#ffe4e8] via-[#fdf2f8] to-[#fce7f3] font-sans">
       
       {/* Decorative SVG Background Waves - Top Left */}
       <svg className="absolute top-0 left-0 w-[600px] h-[600px] pointer-events-none opacity-40 -translate-x-[20%] -translate-y-[20%]" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">

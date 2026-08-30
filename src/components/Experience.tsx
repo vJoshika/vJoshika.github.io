@@ -49,7 +49,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="relative z-20 w-full py-24 bg-white font-sans overflow-hidden">
+    <section id="experience" className="relative z-20 w-full min-h-screen py-24 bg-white font-sans overflow-hidden flex flex-col justify-center">
       <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
         {/* Header */}

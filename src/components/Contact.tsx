@@ -47,7 +47,7 @@ export default function Contact() {
 
   return (
     <>
-      <section id="contact" className="w-full pt-24 pb-8 bg-white font-sans flex flex-col justify-center items-center relative overflow-hidden">
+      <section id="contact" className="w-full min-h-screen pt-24 pb-8 bg-white font-sans flex flex-col justify-center items-center relative overflow-hidden">
         <div className="max-w-4xl w-full mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
         
         {/* Header */}
@@ -71,6 +71,8 @@ export default function Contact() {
 
           <motion.p variants={fadeUp} className="text-[#646464] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-16">
             I'm currently open to internships, collaborations, and interesting projects. If you have something worth building, I want to hear about it.
+            <br />
+            You can also reach me directly at <a href="mailto:joshikavempati122@gmail.com" className="font-semibold text-[#202020] hover:text-[#e8a0c5] transition-colors">joshikavempati122@gmail.com</a>
           </motion.p>
         </motion.div>
 
@@ -141,6 +143,7 @@ export default function Contact() {
           © {new Date().getFullYear()} Joshika V. All rights reserved.
         </p>
         <div className="flex items-center gap-6 text-neutral-400">
+          <a href="mailto:joshikavempati122@gmail.com" className="hover:text-[#e8a0c5] transition-colors"><Mail size={20} /></a>
           <a href="https://www.linkedin.com/in/joshika-vempati/" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8a0c5] transition-colors"><Linkedin size={20} /></a>
           <a href="https://github.com/vJoshika" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8a0c5] transition-colors"><Github size={20} /></a>
           <a href="https://www.instagram.com/joshika_vempati/" target="_blank" rel="noopener noreferrer" className="hover:text-[#e8a0c5] transition-colors"><Instagram size={20} /></a>
