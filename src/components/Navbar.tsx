@@ -24,9 +24,19 @@ const Instagram = ({ size = 20, className = "" }: { size?: number, className?: s
   </svg>
 );
 
+const navLinks = [
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skillset" },
+  { name: "Projects", href: "#project" },
+  { name: "Experience", href: "#experience" },
+  { name: "Contact", href: "#contact" },
+];
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,14 +46,26 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "#hero" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skillset" },
-    { name: "Projects", href: "#project" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -70% 0px" }
+    );
+
+    navLinks.forEach((link) => {
+      const id = link.href.substring(1);
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -81,7 +103,11 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm font-medium text-neutral-600 hover:text-pink-500 transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                activeSection === link.href 
+                  ? "text-pink-600 font-bold" 
+                  : "text-neutral-600 hover:text-pink-500"
+              }`}
             >
               {link.name}
             </a>
@@ -110,7 +136,11 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-lg font-medium text-neutral-700 hover:text-pink-500 transition-colors"
+              className={`text-lg font-medium transition-colors ${
+                activeSection === link.href 
+                  ? "text-pink-600 font-bold" 
+                  : "text-neutral-700 hover:text-pink-500"
+              }`}
             >
               {link.name}
             </a>
