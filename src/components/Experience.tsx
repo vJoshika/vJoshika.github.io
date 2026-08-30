@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Briefcase, Calendar } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Experience() {
   const experiences = [
@@ -18,6 +19,8 @@ export default function Experience() {
       skills: ["Python", "Full Stack", "Data Handling", "System Design"]
     }
   ];
+
+  const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -50,7 +53,13 @@ export default function Experience() {
       <div className="max-w-4xl mx-auto px-6 md:px-12 relative z-10 w-full">
         
         {/* Header */}
-        <div className="text-center mb-20">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={fadeUp}
+          className="text-center mb-20"
+        >
           <h2 className="text-sm font-bold tracking-widest text-pink-500 uppercase mb-3">
             My Journey
           </h2>
@@ -58,7 +67,7 @@ export default function Experience() {
             Work <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A9C] to-[#FF5E85]">Experience</span>
           </h3>
           <div className="w-20 h-1 bg-gradient-to-r from-[#FF7A9C] to-[#FF5E85] mx-auto mt-6 rounded-full"></div>
-        </div>
+        </motion.div>
 
         {/* Timeline */}
         <div className="relative" ref={containerRef}>
@@ -74,7 +83,6 @@ export default function Experience() {
           <div className="flex flex-col gap-12">
             {experiences.map((exp, idx) => {
               // Calculate if this specific dot should be "lit up" based on the progress
-              // We distribute the activation points evenly across the timeline
               const activationPoint = (idx + 0.5) / experiences.length;
               const isLit = scrollProgress >= activationPoint;
 
@@ -87,7 +95,13 @@ export default function Experience() {
                   </div>
 
                   {/* Content Box */}
-                  <div className={`w-full lg:w-1/2 pl-16 lg:pl-0 ${idx % 2 === 0 ? 'lg:pr-16 text-left lg:text-right' : 'lg:pl-16 text-left'}`}>
+                  <motion.div 
+                    initial={{ opacity: 0, x: idx % 2 === 0 ? 50 : -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className={`w-full lg:w-1/2 pl-16 lg:pl-0 ${idx % 2 === 0 ? 'lg:pr-16 text-left lg:text-right' : 'lg:pl-16 text-left'}`}
+                  >
                     <div className="bg-white p-8 rounded-[32px] border border-neutral-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_60px_rgba(255,122,156,0.1)] transition-all duration-700 relative transform hover:-translate-y-1">
                       <div className={`flex items-center gap-2 mb-4 text-pink-500 ${idx % 2 === 0 ? 'lg:justify-end' : 'justify-start'}`}>
                         <Calendar size={16} />
@@ -113,7 +127,7 @@ export default function Experience() {
                         ))}
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
 
                 </div>
               );

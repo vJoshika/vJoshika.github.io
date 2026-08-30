@@ -1,5 +1,6 @@
 import { ArrowRight, Download } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Github = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -41,33 +42,51 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
+  const popIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } };
+
   return (
     <>
       <section id="contact" className="w-full pt-24 pb-8 bg-white font-sans flex flex-col justify-center items-center relative overflow-hidden">
         <div className="max-w-4xl w-full mx-auto px-6 md:px-12 relative z-10 flex flex-col items-center text-center">
         
         {/* Header */}
-        <h2 className="text-sm font-bold tracking-[0.2em] text-[#e8a0c5] uppercase mb-6">
-          Get In Touch
-        </h2>
-        
-        <h3 className="text-6xl md:text-8xl font-extrabold text-[#202020] tracking-tight leading-[1.1] mb-2">
-          Let's Build
-        </h3>
-        <h3 className="text-6xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#e8a0c5] to-[#d870a3] tracking-tight leading-[1.1] mb-12">
-          Something.
-        </h3>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ staggerChildren: 0.15 }}
+          className="flex flex-col items-center text-center w-full"
+        >
+          <motion.h2 variants={fadeUp} className="text-sm font-bold tracking-[0.2em] text-[#e8a0c5] uppercase mb-6">
+            Get In Touch
+          </motion.h2>
+          
+          <motion.h3 variants={fadeUp} className="text-6xl md:text-8xl font-extrabold text-[#202020] tracking-tight leading-[1.1] mb-2">
+            Let's Build
+          </motion.h3>
+          <motion.h3 variants={fadeUp} className="text-6xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#e8a0c5] to-[#d870a3] tracking-tight leading-[1.1] mb-12">
+            Something.
+          </motion.h3>
 
-        <p className="text-[#646464] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-16">
-          I'm currently open to internships, collaborations, and interesting projects. If you have something worth building, I want to hear about it.
-        </p>
+          <motion.p variants={fadeUp} className="text-[#646464] text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-16">
+            I'm currently open to internships, collaborations, and interesting projects. If you have something worth building, I want to hear about it.
+          </motion.p>
+        </motion.div>
 
         {/* Premium Form Card */}
-        <div className="w-full max-w-2xl mx-auto mb-16 relative group">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={popIn}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="w-full max-w-2xl mx-auto mb-16 relative group"
+        >
           {/* Subtle animated gradient glow */}
           <div className="absolute -inset-1 bg-gradient-to-r from-pink-300 via-[#e8a0c5] to-purple-300 rounded-[2.5rem] blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
           
-          <div className="relative bg-white/80 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 md:p-12 flex flex-col gap-8">
+          <div className="relative bg-white/80 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] p-8 md:p-12 flex flex-col gap-8 text-left">
             <div className="text-center mb-2">
               <p className="text-xs font-bold tracking-[0.2em] text-[#e8a0c5] uppercase mb-3">
                 Start the conversation
@@ -112,7 +131,7 @@ export default function Contact() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
       </section>
 

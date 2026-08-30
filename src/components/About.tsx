@@ -1,6 +1,12 @@
 import { BookOpen, Cpu, Globe, Rocket, Download, User } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
 export default function About() {
+  const fadeUp: Variants = { 
+    hidden: { opacity: 0, y: 40 }, 
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } 
+  };
+
   return (
     <section id="about" className="relative w-full min-h-screen py-24 bg-white overflow-hidden font-sans flex items-center">
       
@@ -8,10 +14,16 @@ export default function About() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-rose-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ staggerChildren: 0.4 }}
+        className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full"
+      >
         
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in-up delay-200">
+        <motion.div variants={fadeUp} className="text-center mb-16">
           <h2 className="text-sm font-bold tracking-widest text-pink-500 uppercase mb-3">
             Discover
           </h2>
@@ -19,12 +31,12 @@ export default function About() {
             About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A9C] to-[#FF5E85]">Me</span>
           </h3>
           <div className="w-20 h-1 bg-gradient-to-r from-[#FF7A9C] to-[#FF5E85] mx-auto mt-6 rounded-full"></div>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           
           {/* Left Column - Visual Profile */}
-          <div className="lg:col-span-5 relative group animate-fade-in-up delay-400">
+          <motion.div variants={fadeUp} className="lg:col-span-5 relative group">
             <div className="absolute inset-0 bg-gradient-to-br from-pink-200 to-rose-100 rounded-[40px] transform rotate-3 scale-[1.02] transition-transform duration-500 group-hover:rotate-6 opacity-60"></div>
             <div className="relative bg-white/80 backdrop-blur-xl border border-white/50 p-8 rounded-[40px] shadow-[0_8px_32px_rgba(255,122,156,0.1)] flex flex-col items-center text-center overflow-hidden">
               
@@ -69,10 +81,10 @@ export default function About() {
                 <Download size={18} /> Download Resume
               </a>
             </div>
-          </div>
+          </motion.div>
           
           {/* Right Column - Text Story */}
-          <div className="lg:col-span-7 flex flex-col gap-6 pt-4 animate-fade-in-up delay-600">
+          <motion.div variants={fadeUp} className="lg:col-span-7 flex flex-col gap-6 pt-4">
             
             {/* Intro Card */}
             <div className="p-6 rounded-3xl bg-white border border-neutral-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
@@ -102,10 +114,10 @@ export default function About() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
           
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
