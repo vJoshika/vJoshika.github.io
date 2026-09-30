@@ -41,9 +41,41 @@ const MessageSquare = ({ size = 20, className = "" }: { size?: number, className
 export default function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [resultMessage, setResultMessage] = useState("");
 
   const fadeUp = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } };
   const popIn = { hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResultMessage("");
+    
+    const formData = new FormData(event.currentTarget);
+    formData.append("access_key", "bffb9c16-a8be-4195-8fcc-695daf4412f4");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResultMessage("Message sent successfully!");
+        setEmail("");
+        setMessage("");
+      } else {
+        setResultMessage("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setResultMessage("Something went wrong. Please try again.");
+    }
+    
+    setIsSubmitting(false);
+  };
 
   return (
     <>
@@ -96,13 +128,15 @@ export default function Contact() {
               <h4 className="text-3xl font-bold text-neutral-900">How can I help you?</h4>
             </div>
 
-            <div className="flex flex-col gap-5">
+            <form onSubmit={onSubmit} className="flex flex-col gap-5">
               <div className="relative group/input">
                 <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                   <Mail className="text-neutral-400 group-focus-within/input:text-[#e8a0c5] transition-colors" size={20} />
                 </div>
                 <input 
                   type="email"
+                  name="email"
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
@@ -115,6 +149,8 @@ export default function Contact() {
                   <MessageSquare className="text-neutral-400 group-focus-within/input:text-[#e8a0c5] transition-colors" size={20} />
                 </div>
                 <textarea 
+                  name="message"
+                  required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Drop your messages..."
@@ -124,14 +160,22 @@ export default function Contact() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <button className="w-full sm:w-1/2 h-14 bg-gradient-to-r from-[#202020] to-[#3a3a3a] text-white rounded-2xl font-bold hover:from-[#e8a0c5] hover:to-[#d870a3] transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(232,160,197,0.3)] flex items-center justify-center gap-2 group/btn">
-                  Send Message <ArrowRight className="transform group-hover/btn:translate-x-1 transition-transform" size={18} />
+                <button type="submit" disabled={isSubmitting} className="w-full sm:w-1/2 h-14 bg-gradient-to-r from-[#202020] to-[#3a3a3a] text-white rounded-2xl font-bold hover:from-[#e8a0c5] hover:to-[#d870a3] transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.1)] hover:shadow-[0_15px_30px_rgba(232,160,197,0.3)] flex items-center justify-center gap-2 group/btn disabled:opacity-70 disabled:cursor-not-allowed">
+                  {isSubmitting ? "Sending..." : (
+                    <>Send Message <ArrowRight className="transform group-hover/btn:translate-x-1 transition-transform" size={18} /></>
+                  )}
                 </button>
-                <button className="w-full sm:w-1/2 h-14 bg-white border border-neutral-200 text-[#202020] rounded-2xl font-bold hover:border-[#202020] hover:bg-neutral-50 transition-all flex items-center justify-center gap-2 shadow-sm">
+                <a href="/resume.pdf" download="Joshika_V_Resume.pdf" className="w-full sm:w-1/2 h-14 bg-white border border-neutral-200 text-[#202020] rounded-2xl font-bold hover:border-[#202020] hover:bg-neutral-50 transition-all flex items-center justify-center gap-2 shadow-sm">
                   <Download size={18} /> Download Resume
-                </button>
+                </a>
               </div>
-            </div>
+
+              {resultMessage && (
+                <p className={`text-sm text-center font-medium ${resultMessage.includes("success") ? "text-green-600" : "text-red-500"}`}>
+                  {resultMessage}
+                </p>
+              )}
+            </form>
           </div>
         </motion.div>
       </div>

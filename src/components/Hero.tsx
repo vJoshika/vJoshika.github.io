@@ -55,7 +55,8 @@ export default function Hero() {
               View My Projects <ArrowRight size={16} />
             </a>
             <a
-              href="#"
+              href="/resume.pdf"
+              download="Joshika_V_Resume.pdf"
               className="px-8 py-3 bg-white/40 text-[#2A2A2A] font-medium rounded-full hover:bg-white/80 transition-all flex items-center gap-2 border border-[#FFB6C6] text-sm"
             >
               Download Resume <Download size={16} />

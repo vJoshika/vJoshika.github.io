@@ -75,7 +75,8 @@ export default function About() {
               </div>
 
               <a
-                href="#"
+                href="/resume.pdf"
+                download="Joshika_V_Resume.pdf"
                 className="w-full mt-8 py-4 bg-gradient-to-r from-[#FF7A9C] to-[#FF5E85] text-white rounded-2xl flex items-center justify-center gap-2 font-semibold hover:shadow-[0_8px_20px_rgba(255,122,156,0.4)] transition-all hover:-translate-y-1"
               >
                 <Download size={18} /> Download Resume
